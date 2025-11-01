@@ -6,6 +6,24 @@ interface CardProps{
     type : "twitter" | "youtube"
 }
 
+function getYouTubeEmbedUrl(url: string): string {
+  try {
+    // Handle full YouTube links
+    if (url.includes("youtube.com/watch")) {
+      const videoId = new URL(url).searchParams.get("v");
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
+    }
+    // Handle shortened youtu.be links
+    if (url.includes("youtu.be/")) {
+      const id = url.split("youtu.be/")[1].split("?")[0];
+      return `https://www.youtube.com/embed/${id}`;
+    }
+  } catch (err) {
+    console.error("Invalid YouTube URL:", url);
+  }
+  return "";
+}
+
 export function Card({title, link, type} : CardProps){
     return <div>
         <div className="p-4 bg-white rounded-md border-gray-200 border  max-w-72">
@@ -36,7 +54,16 @@ export function Card({title, link, type} : CardProps){
                     <a href={link.replace("x.com", "twitter.com")}></a> 
                 </blockquote>}
                 
-                {type ==='youtube' && <iframe className="w-full" src={link.replace("watch", "embed")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>}
+                {type === "youtube" && (
+                <iframe
+                    className="w-full aspect-video rounded-md"
+                    src={getYouTubeEmbedUrl(link)}
+                    title={title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                />
+                )}
                 
             </div>
         </div>
