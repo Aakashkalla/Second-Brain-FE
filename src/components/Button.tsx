@@ -14,7 +14,7 @@ const variantStyles = {
     "secondary" : "bg-purple-400 text-white"
 }
 
-const defaultStyle = "rounded-md cursor-pointer hover:bg-purple-900"
+const defaultStyle = "rounded-md cursor-pointer hover:bg-purple-900 flex gap-2 items-center"
 
 const sizeStyles = {
     "sm" : "py-1 px-2",
@@ -24,7 +24,7 @@ const sizeStyles = {
 
 export const Button = (props : ButtonProps) => {
 
-    return <button className={`${variantStyles[props.variant]} ${defaultStyle} ${sizeStyles[props.size]} flex gap-1`}>
+    return <button className={`${variantStyles[props.variant]} ${defaultStyle} ${sizeStyles[props.size]}`}>
        {props.startIcon} {props.text} {props.endIcon}
         </button>
 }
