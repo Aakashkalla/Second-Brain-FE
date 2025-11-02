@@ -3,7 +3,8 @@ import { ShareIcon } from "../icons/ShareIcon";
 interface CardProps{
     title : string,
     link : string,
-    type : "twitter" | "youtube"
+    type : "twitter" | "youtube",
+    tag : string
 }
 
 function getYouTubeEmbedUrl(url: string): string {
@@ -24,7 +25,7 @@ function getYouTubeEmbedUrl(url: string): string {
   return "";
 }
 
-export function Card({title, link, type} : CardProps){
+export function Card({title, link, type, tag} : CardProps){
     return <div>
         <div className="p-4 bg-white rounded-md border-gray-200 border  max-w-72">
             {/* Top Border of Card Start */}
@@ -64,7 +65,7 @@ export function Card({title, link, type} : CardProps){
                     allowFullScreen
                 />
                 )}
-                
+                {tag}
             </div>
         </div>
         </div>
