@@ -7,6 +7,7 @@ interface ButtonProps{
     startIcon?: ReactElement;
     endIcon?: ReactElement;
     onClick?: () => void;
+    loading? : boolean
 }
 
 const variantStyles = {
@@ -24,7 +25,7 @@ const sizeStyles = {
 
 export const Button = (props : ButtonProps) => {
 
-    return <button onClick={props.onClick} className={`${variantStyles[props.variant]} ${defaultStyle} ${sizeStyles[props.size]}`}>
+    return <button onClick={props.onClick} className={`${variantStyles[props.variant]} ${defaultStyle} ${sizeStyles[props.size]} ${props.loading ? "bg-purple-400" : ""}`}>
        {props.startIcon} {props.text} {props.endIcon}
         </button>
 }
